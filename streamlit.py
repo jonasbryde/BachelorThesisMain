@@ -20,7 +20,7 @@ from topfarm.easy_drivers import EasyScipyOptimizeDriver
 from topfarm.plotting import NoPlot, XYPlotComp
 from MinimumDistanceMultiRotor import MinimumDistanceMultiRotor
 from optimizeSingleTurbines import optimizeSingleTurbines
-from positionMultiRotor import positionMultiRotor
+from optimizeMultiRotor import optimizeMultiRotor
 from PerformWindAnalysis import perform_wind_analysis
 
 def main():
