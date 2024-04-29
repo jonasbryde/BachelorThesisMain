@@ -164,7 +164,7 @@ def main():
     if st.button("Optimize Wind Farm"):
         if rotorType == 'Single Rotor':
             with st.spinner('Wait for it...'):
-                st.session_state['initial'], st.session_state['state'] = optimizeSingleTurbines(boundaries, n_wt, 1000)
+                st.session_state['initial'], st.session_state['state'] = optimizeSingleTurbines(boundaries, n_wt, 1000, st.sesssion_state['f'], st.sesssion_state['A'], st.sesssion_state['k'])
                 st.write(st.session_state['state'])
             st.success('Done!')
             
