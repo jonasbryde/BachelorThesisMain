@@ -10,7 +10,7 @@ def positionMultiRotor(boundaries, minimumDistance, n_mr):
 
     positions = [[boundaries[0][0] + 500, boundaries[0][1] + 500]]
 
-    for i in range(n_mr):
+    for i in range(n_mr - 1):
 
         PointApproved = False
         while PointApproved == False:
@@ -24,5 +24,5 @@ def positionMultiRotor(boundaries, minimumDistance, n_mr):
         
         positions.append([point.x, point.y])
 
-
-    return positions
+    points = {"x": np.array([point[0] for point in positions]), "y": np.array([point[1] for point in positions])}
+    return points
