@@ -22,16 +22,12 @@ from initializeTurbines import initializeTurbines
 
 
 
-def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance):
+def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
 
     initial = initializeTurbines(boundaries, n_wt, 1500)
 
     constraint = XYBoundaryConstraint(boundaries, 'polygon')
 
-
-    f = [0.084,0.084,0.084,0.084,0.083,0.083,0.083,0.083,0.083,0.083,0.083,0.083]
-    A = [10,8,6,10,10,10,10,10,8,12,13,13]
-    k = [2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5]
     wd = np.linspace(0, 360, len(f), endpoint=False)
     ti = 0.1
 
