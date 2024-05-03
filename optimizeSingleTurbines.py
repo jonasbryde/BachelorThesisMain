@@ -17,6 +17,7 @@ from py_wake.wind_turbines import WindTurbine
 from py_wake.wind_turbines.power_ct_functions import PowerCtTabular
 import numpy as np
 from topfarm.constraint_components.boundary import XYBoundaryConstraint
+from topfarm.constraint_components.spacing import SpacingConstraint
 import random
 import matplotlib.pyplot as plt
 from initializeTurbines import initializeTurbines
@@ -29,8 +30,10 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
 
     initial = initializeTurbines(boundaries, n_wt, 1500)
 
-    constraint = XYBoundaryConstraint(boundaries, 'polygon')
+    boundaryConstraint = XYBoundaryConstraint(boundaries, 'polygon')
 
+    spacingConstraint = SpacingConstraint(240*5)
+    
     wd = np.linspace(0, 360, len(f), endpoint=False)
     ti = 0.1
 
@@ -58,7 +61,7 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
     tf_problem = TopFarmProblem(
                 design_vars,
                 cost_comp,
-                constraints=constraint,
+                constraints = [boundaryConstraint, spacingConstraint],
                 driver=driver,
                 plot_comp=XYPlotComp())
 
