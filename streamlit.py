@@ -134,10 +134,6 @@ def main():
             (2,3,4,5,6,7,8), index=None, placeholder="Select number collumns..."
         )
         st.write('You selected:', str(collumns), "number of rows...")
-        n_mr = st.number_input(
-            "Choose how many multi rotor systems the wind park will include",
-            1,375, placeholder="Select number of turbines..."
-        )
     elif rotorType == "Single Rotor":
         
         wd = np.linspace(0, 360, len(st.session_state['f']), endpoint=False)
@@ -157,11 +153,6 @@ def main():
                             powerCtFunction=PowerCtTabular(u,power,'kW',ct))
 
         wfmodel = NOJ(site, wind_turbines)
-
-        n_wt = st.number_input("Choose how many turbines the windpark will inhabit",
-                            1,200, placeholder="Select number of turbines..."
-                            )
-        st.write('You selected:', str(n_wt), "number of turbines")
     
     def add_markers(points):
         for lat, lon in points:
@@ -170,6 +161,11 @@ def main():
     # Button to trigger optimization
     if st.button("Optimize Wind Farm"):
         if rotorType == 'Single Rotor':
+            if option == 'Sørlige Norsjø II':
+                n_wt = 100
+            elif option == 'Utsira Nord':
+                n_wt = 33
+            st.write('The capasity at',option,'is',str(n_wt),'turbines')
             with st.spinner('Wait for it...'):
                 st.session_state['initial'], st.session_state['state'], aep_values = optimizeSingleTurbines(boundaries, n_wt, 1000, st.session_state['f'], st.session_state['A'], st.session_state['k'])
                 aep_plot=aep_values[0]
@@ -216,10 +212,19 @@ def main():
             
 
         elif rotorType == 'Multi Rotor':
+
+            if option == 'Sørlige Norsjø II':
+                max_capasity = 1500
+                n_mrs = max_capasity // (rows * collumns)
+            elif option == 'Utsira Nord':
+                max_capasity = 500
+                n_mrs = max_capasity // (rows * collumns)
+            st.write('The capasity at',option,'with',str(rows),'amount of rows, and',str(collumns),'amount of columns, is ',str(n_mrs),'Multi Rotor Systems')
+            
             #Optimize according to multi Rotor
             minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], wd, rows, collumns)
             st.write("The minimum distance between multi rotors should be: ", str(minimumDistance))
-            st.session_state['state'] = positionMultiRotor(boundaries, minimumDistance, n_mr)
+            st.session_state['state'] = positionMultiRotor(boundaries, minimumDistance, n_mrs)
 
             y_coords = st.session_state['state']['x']
             x_coords = st.session_state['state']['y']
