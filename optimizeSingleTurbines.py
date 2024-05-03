@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from py_wake.deficit_models.gaussian import IEA37SimpleBastankhahGaussian     #wake model
 from py_wake.examples.data.iea37 import IEA37_WindTurbines, IEA37Site         #wind turbines and site used
 from topfarm.cost_models.py_wake_wrapper import PyWakeAEPCostModelComponent   #cost model
+import streamlit as st
 
 from topfarm import TopFarmProblem
 from topfarm.easy_drivers import EasyScipyOptimizeDriver
@@ -21,6 +22,8 @@ import matplotlib.pyplot as plt
 from initializeTurbines import initializeTurbines
 
 
+aep_values=[]
+sorted_aep_values = []
 
 def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
 
@@ -48,7 +51,7 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
 
     cost_comp = PyWakeAEPCostModelComponent(wfmodel, n_wt, wd=wd)
 
-    driver = EasyScipyOptimizeDriver()
+    driver = EasyScipyOptimizeDriver(maxiter=420)
 
     design_vars = dict(zip('xy', (initial[:, :2]).T))
 
@@ -59,6 +62,15 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
                 driver=driver,
                 plot_comp=XYPlotComp())
 
-    _, state, _ = tf_problem.optimize()
+    cost, state, recorder = tf_problem.optimize()
+    
+    aep_values.append(recorder['AEP'])
 
-    return design_vars, state
+    #sorted_aep_values = [(value, index + 1) for index, value in enumerate(aep_values)]
+
+    #print("AEP values:", aep_values)
+
+    
+
+
+    return design_vars, state, aep_values
