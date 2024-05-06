@@ -4,7 +4,7 @@ from py_wake.site import XRSite
 import GenerateMultiRotorCoordinates
 
 
-def sectorAEP(f, A, k, wd, ti, centers, my_wt):
+def sectorAEP(f, A, k, wd, ti, centers, my_wt, turbineDiameter, turbineTipClearence, Columns, rows):
 
     #list of AEPs for each sector
     AEP_list = []
@@ -24,7 +24,7 @@ def sectorAEP(f, A, k, wd, ti, centers, my_wt):
 
 
         #Receiving coordinates from the function GenerateMultiRotorCoordinates in the file GenerateMultiRotorCoordinates.py
-        coordinates = GenerateMultiRotorCoordinates.generateMultiRotorCoordinates(centers, i)
+        coordinates = GenerateMultiRotorCoordinates.generateMultiRotorCoordinates(centers, i, turbineDiameter, turbineTipClearence, Columns, rows)
 
         x_cord = coordinates["xCoordinates"]
         y_cord = coordinates["yCoordinates"]
