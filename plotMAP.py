@@ -20,8 +20,26 @@ SNii_koordinater = [
 (56.4838889,4.6413889),
 (56.8233333,4.3466667),]
 
+SNII_fase2 = [(56.90270, 5.31786),
+              (56.91812, 5.00050),
+              (56.90300, 4.98727),
+              (56.89233, 4.99168),
+              (56.88133, 5.00616),
+              (56.87398, 5.04019),
+              (56.66423, 5.26333)]
+
+Utsira_1 = [(59.47294, 4.56525),
+            (59.38016, 4.59874),
+            (59.35812, 4.30200),
+            (59.41924, 4.28015),
+            (59.44895, 4.27877)]
+
+
 folium.PolyLine(utsira_koordinater, tooltip="Utsira Nord").add_to(m)
 folium.PolyLine(SNii_koordinater, tooltip="Sørlige Norsjø II").add_to(m)
+folium.PolyLine(SNII_fase2, tooltip="Sørlige Norsjø II, fase 1").add_to(m)
+folium.PolyLine(Utsira_1, tooltip="Utsira Nord, område 1").add_to(m)
+
 
 def add_markers(points):
         for lat, lon in points:
