@@ -92,7 +92,7 @@ def main():
         constraint = XYBoundaryConstraint(boundaries, 'polygon')
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
-        n_wt = 10
+        n_wt = 100
         st.write('The capasity at',option,'is',str(n_wt),'turbines')
 
         if st.button("Optimize Wind Farm"):
@@ -114,6 +114,8 @@ def main():
 
         st.session_state['wd'] = np.linspace(0, 360, len(st.session_state['f']), endpoint=False)
 
+        ti = 0.1
+
         st.session_state['rows'] = st.selectbox(
             "Choose how many rows the multi rotor systems will include",
             (2,3,4,5,6,7,8), index=None, placeholder="Select number rows..."
@@ -124,8 +126,18 @@ def main():
             (2,3,4,5,6,7,8), index=None, placeholder="Select number columns..."
         )
         st.write('You selected:', str(st.session_state['columns']), "number of rows")
+        st.session_state['turbineDiameter'] = st.selectbox(
+            "Choose the diameter of the turbines",
+            (10,20,30,40), index=None, placeholder="Select diameter..."
+        )
+        st.write('You selected:', str(st.session_state['turbineDiameter']), "meters.")
+        st.session_state['turbineTipClearence'] = st.selectbox(
+            "Choose the distance between turbine tips",
+            (1,2,3), index=None, placeholder="Select clearence..."
+        )
+        st.write('You selected:', str(st.session_state['turbineTipClearence']), "meters.")
 
-        max_capasity = 500
+        max_capasity = 1500
         if st.session_state['rows'] != None and st.session_state['columns'] != None:
             st.session_state['n_mrs'] = max_capasity // (st.session_state['rows'] * st.session_state['columns'])
             st.write('The capasity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
@@ -133,15 +145,17 @@ def main():
         if st.button("Optimize Wind Farm"):
             minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'])
             st.write("The minimum distance between multi rotors should be: ", str(minimumDistance))
-            st.session_state['state'] = positionMultiRotor(boundaries, minimumDistance, st.session_state['n_mrs'])
+            with st.spinner('Wait for it...'):
+                st.session_state['state'], st.session_state['AEP'] = positionMultiRotor(boundaries, minimumDistance, st.session_state['n_mrs'], st.session_state['f'], st.session_state['A'], st.session_state['k'], st.session_state['wd'], ti, st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'], st.session_state['columns'], st.session_state['rows'])
 
-            y_coords = st.session_state['state']['x']
-            x_coords = st.session_state['state']['y']
-            
-            plotMAP(x_coords,y_coords)
-            st.write(st.session_state['state'])
+                y_coords = st.session_state['state']['x']
+                x_coords = st.session_state['state']['y']
+                
+                plotMAP(x_coords,y_coords)
+                st.write(st.session_state['state'])
 
-
+                st.subheader('The expected AEP is '+str(st.session_state['AEP'])+'GWH')
+                print(st.session_state['AEP'])
 
     elif option == 'Utsira Nord' and rotorType == 'Single Rotor':
         latitude, longitude = 59.4822222, 4.6736111
@@ -150,7 +164,7 @@ def main():
         constraint = XYBoundaryConstraint(boundaries, 'polygon')
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
-        n_wt = 10
+        n_wt = 33
         st.write('The capasity at',option,'is',str(n_wt),'turbines')
 
         if st.button("Optimize Wind Farm"):
@@ -170,6 +184,7 @@ def main():
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
         st.session_state['wd'] = np.linspace(0, 360, len(st.session_state['f']), endpoint=False)
+        ti = 0.1
 
         st.session_state['rows'] = st.selectbox(
             "Choose how many rows the multi rotor systems will include",
@@ -181,6 +196,16 @@ def main():
             (2,3,4,5,6,7,8), index=None, placeholder="Select number columns..."
         )
         st.write('You selected:', str(st.session_state['columns']), "number of rows")
+        st.session_state['turbineDiameter'] = st.selectbox(
+            "Choose the diameter of the turbines",
+            (10,20,30,40), index=None, placeholder="Select diameter..."
+        )
+        st.write('You selected:', str(st.session_state['turbineDiameter']), "meters.")
+        st.session_state['turbineTipClearence'] = st.selectbox(
+            "Choose the distance between turbine tips",
+            (1,2,3), index=None, placeholder="Select clearence..."
+        )
+        st.write('You selected:', str(st.session_state['turbineTipClearence']), "meters.")
 
         max_capasity = 500
         if st.session_state['rows'] != None and st.session_state['columns'] != None:
@@ -190,13 +215,21 @@ def main():
         if st.button("Optimize Wind Farm"):
             minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'])
             st.write("The minimum distance between multi rotors should be: ", str(minimumDistance))
-            st.session_state['state'] = positionMultiRotor(boundaries, minimumDistance, st.session_state['n_mrs'])
+            with st.spinner('Wait for it...'):
+                st.session_state['state'], st.session_state['AEP'] = positionMultiRotor(boundaries, minimumDistance, st.session_state['n_mrs'], st.session_state['f'], st.session_state['A'], st.session_state['k'], st.session_state['wd'], ti, st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'], st.session_state['columns'], st.session_state['rows'])
 
-            y_coords = st.session_state['state']['x']
-            x_coords = st.session_state['state']['y']
+                y_coords = st.session_state['state']['x']
+                x_coords = st.session_state['state']['y']
                 
-            plotMAP(x_coords,y_coords)
-            st.write(st.session_state['state'])
+                plotMAP(x_coords,y_coords)
+                st.write(st.session_state['state'])
+
+                st.subheader('The expected AEP is '+str(st.session_state['AEP'])+'GWH')
+                print(st.session_state['AEP'])
+            
+            
+
+            
             
     
 
