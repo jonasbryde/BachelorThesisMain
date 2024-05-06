@@ -3,8 +3,24 @@ from shapely.geometry import Polygon, Point
 import random
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as mpl_polygon
+from py_wake.wind_turbines import WindTurbine
+from py_wake.wind_turbines.power_ct_functions import PowerCtTabular
+from sectorAEP import sectorAEP
 
-def positionMultiRotor(boundaries, minimumDistance, n_mr):
+
+
+def positionMultiRotor(boundaries, minimumDistance, n_mr, f, A, k, wd, ti, turbineDiameter, turbineTipClearence, Columns, rows):
+
+    #Defining the wind turbine object
+    u = [0,3,12,25,30]
+    ct = [0,8/9,8/9,.3, 0]
+    power = [0,0,1000,1000,0]
+
+    my_wt = WindTurbine(name='MyWT',
+                        diameter=turbineDiameter,
+                        hub_height=40,
+                        powerCtFunction=PowerCtTabular(u,power,'kW',ct))
+
     outerBoundary = Polygon(boundaries)
     min_x, min_y, max_x, max_y = outerBoundary.bounds
 
@@ -25,4 +41,7 @@ def positionMultiRotor(boundaries, minimumDistance, n_mr):
         positions.append([point.x, point.y])
 
     points = {"x": np.array([point[0] for point in positions]), "y": np.array([point[1] for point in positions])}
-    return points
+
+    aep = sectorAEP(f, A, k, wd, ti, positions, my_wt, turbineDiameter, turbineTipClearence, Columns, rows)
+
+    return points, aep
