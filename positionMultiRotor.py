@@ -8,7 +8,7 @@ def positionMultiRotor(boundaries, minimumDistance, n_mr):
     outerBoundary = Polygon(boundaries)
     min_x, min_y, max_x, max_y = outerBoundary.bounds
 
-    positions = [[boundaries[0][0] + 500, boundaries[0][1] + 500]]
+    positions = [[boundaries[0][0], boundaries[0][1]]]
 
     for i in range(n_mr - 1):
 
