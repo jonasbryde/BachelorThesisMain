@@ -87,8 +87,7 @@ def main():
 
     if option == 'Sørlige Nordsjø II' and rotorType == 'Single Rotor':
         latitude, longitude = 56.8233333, 4.3466667
-        #boundaries = [(6298528.997, 582191.366), (6329862.416, 631362.055), (6291012.798, 652762.909), (6273783.939, 624877.085), (6261144.506, 601081.704)]
-        boundaries = [(6308947.473, 641156.811),(6310053.165,621782.906),(6308347.020, 621026.561),(6307167.409,621329.681),(6305969.049,622247.549),(6305212.449,624345.257),(6282300.051,638714.086)]
+        boundaries = [(6290955.204, 652660.403),(6282111.501,638361.822),(6305186.834, 624490.471),(6308047.231,622444.994),(6307693.262,620983.393),(6309020.039,620539.306),(6311673.489,621616.735),(6312254.677,639948.895),(6311985.300,641080.079)]
         constraint = XYBoundaryConstraint(boundaries, 'polygon')
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
@@ -107,8 +106,7 @@ def main():
 
     elif option == 'Sørlige Nordsjø II' and rotorType == 'Multi Rotor':
         latitude, longitude = 56.8233333, 4.3466667
-        #boundaries = [(6298528.997, 582191.366), (6329862.416, 631362.055), (6291012.798, 652762.909), (6273783.939, 624877.085), (6261144.506, 601081.704)]
-        boundaries = [(6308947.473, 641156.811),(6310053.165,621782.906),(6308347.020, 621026.561),(6307167.409,621329.681),(6305969.049,622247.549),(6305212.449,624345.257),(6282300.051,638714.086)]
+        boundaries = [(6290955.204, 652660.403),(6282111.501,638361.822),(6305186.834, 624490.471),(6308047.231,622444.994),(6307693.262,620983.393),(6309020.039,620539.306),(6311673.489,621616.735),(6312254.677,639948.895),(6311985.300,641080.079)]
         constraint = XYBoundaryConstraint(boundaries, 'polygon')
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
@@ -159,8 +157,7 @@ def main():
 
     elif option == 'Utsira Nord' and rotorType == 'Single Rotor':
         latitude, longitude = 59.4822222, 4.6736111
-        #boundaries = [(6590631.429, 571964.171), (6548635.029, 580697.416), (6553152.617, 603791.015), (6594942.605, 594798.438)]
-        boundaries = [(6593759.664, 588685.626),(6583474.952, 590831.133), (6580653.644, 574021.634), (6587434.899, 572648.630), (6590741.443, 572506.738)]
+        boundaries = [(6590740.850, 572781.322),(6593647.566, 588120.311), (6582906.767, 590605.006), (6579871.157, 574182.456), (6585694.303, 572981.696)]
         constraint = XYBoundaryConstraint(boundaries, 'polygon')
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
@@ -178,8 +175,7 @@ def main():
 
     elif option == 'Utsira Nord' and rotorType == 'Multi Rotor':
         latitude, longitude = 59.4822222, 4.6736111
-        #boundaries = [(6590631.429, 571964.171), (6548635.029, 580697.416), (6553152.617, 603791.015), (6594942.605, 594798.438)]
-        boundaries = [(6593759.664, 588685.626),(6583474.952, 590831.133), (6580653.644, 574021.634), (6587434.899, 572648.630), (6590741.443, 572506.738)]
+        boundaries = [(6590740.850, 572781.322),(6593647.566, 588120.311), (6582906.767, 590605.006), (6579871.157, 574182.456), (6585694.303, 572981.696)]
         constraint = XYBoundaryConstraint(boundaries, 'polygon')
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
