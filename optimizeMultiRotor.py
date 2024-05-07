@@ -1,4 +1,4 @@
-from MinimumDistanceMultiRotor import MinimumDistanceMultiRotor
+from minimumDistance import MinimumDistanceMultiRotor
 from positionMultiRotor import positionMultiRotor
 from sectorAEP import sectorAEP
 
