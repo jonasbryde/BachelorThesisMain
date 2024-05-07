@@ -6,7 +6,7 @@ from GenerateMultiRotorCoordinates import generateMultiRotorCoordinates
 from py_wake import NOJ
 import numpy as np
 
-def MinimumDistanceMultiRotor(f,A,k,wd,rows,collumns):
+def MinimumDistanceMultiRotor(f,A,k,wd,rows,collumns,turbineDiameter,turbineTipClearence):
     #find the index with the max speed
     maxspeed_index = 0 
 
@@ -29,7 +29,7 @@ def MinimumDistanceMultiRotor(f,A,k,wd,rows,collumns):
     power = [0,0,200,400,600,800,1000,1000,1000,1000,0]
 
     my_wt = WindTurbine(name='MyWT',
-                    diameter=30,
+                    diameter=turbineDiameter,
                     hub_height=40,
                     powerCtFunction=PowerCtTabular(u,power,'kW',ct))
     
@@ -37,7 +37,7 @@ def MinimumDistanceMultiRotor(f,A,k,wd,rows,collumns):
 
     AEPGoal = 0 
     centers = [[0,0,0], [0,20000,0]]
-    coordinates = generateMultiRotorCoordinates(centers,0,30,1,collumns,rows)
+    coordinates = generateMultiRotorCoordinates(centers,0,turbineDiameter,turbineTipClearence,collumns,rows)
     x_cord = coordinates["xCoordinates"]
     y_cord = coordinates["yCoordinates"]
     z_cord = coordinates["zCoordinates"]
@@ -57,7 +57,7 @@ def MinimumDistanceMultiRotor(f,A,k,wd,rows,collumns):
 
         minimumDistance += 100
         centers = [[0,0,0],[0,minimumDistance,0]]
-        coordinates = generateMultiRotorCoordinates(centers,0,30,1,collumns,rows)
+        coordinates = generateMultiRotorCoordinates(centers,0,turbineDiameter,turbineTipClearence,collumns,rows)
         x_cord = coordinates["xCoordinates"]
         y_cord = coordinates["yCoordinates"]
         z_cord = coordinates["zCoordinates"]
