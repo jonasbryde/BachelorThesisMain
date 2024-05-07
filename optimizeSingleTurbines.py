@@ -41,9 +41,10 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
                                 coords={'wd': wd}))
 
     #Defining the wind turbine object
-    u = [0,3,12,25,30]
-    ct = [0,8/9,8/9,.3, 0]
-    power = [0,0,15000,15000,0]
+    u = [0,3,5,7,9,10.59,15,20,25,26]
+    power = [0,0,2000,5000,10000,15000,15000,15000,15000,0]
+    ct = [0,0.8,0.8,0.8,0.8,0.8,0.3,0.1,0.1,0]
+    
 
     wind_turbines = WindTurbine(name='MyWT',
                         diameter=240,
