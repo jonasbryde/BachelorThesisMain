@@ -12,9 +12,10 @@ from sectorAEP import sectorAEP
 def positionMultiRotor(boundaries, minimumDistance, n_mr, f, A, k, wd, ti, turbineDiameter, turbineTipClearence, Columns, rows):
 
     #Defining the wind turbine object
-    u = [0,3,12,25,30]
-    ct = [0,8/9,8/9,.3, 0]
-    power = [0,0,1000,1000,0]
+    u = [0,4,6.5,7.5,9,10,13.5,15,20,25,26]
+    power = [0,0,200,400,600,800,1000,1000,1000,1000,0]
+    ct = [1,1,0.8,0.7,0.6,0.6,0.5,0.4,0.3,0.25,0]
+    
 
     my_wt = WindTurbine(name='MyWT',
                         diameter=turbineDiameter,
