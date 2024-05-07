@@ -17,7 +17,7 @@ from topfarm.cost_models.py_wake_wrapper import PyWakeAEPCostModelComponent
 from topfarm import TopFarmProblem
 from topfarm.easy_drivers import EasyScipyOptimizeDriver
 from topfarm.plotting import NoPlot, XYPlotComp
-from MinimumDistanceMultiRotor import MinimumDistanceMultiRotor
+from minimumDistance import MinimumDistanceMultiRotor
 from optimizeSingleTurbines import optimizeSingleTurbines
 from positionMultiRotor import positionMultiRotor
 from PerformWindAnalysis import perform_wind_analysis
@@ -25,7 +25,7 @@ from pyproj import Proj, transform
 import ast
 import time
 from plotAEP import plotAEP
-from plotMap import plotMAP
+from plotMAP import plotMAP
 
 def main():
 
