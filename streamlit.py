@@ -141,7 +141,7 @@ def main():
             st.write('The capasity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
 
         if st.button("Optimize Wind Farm"):
-            minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'])
+            minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'], st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'])
             st.write("The minimum distance between multi rotors should be: ", str(minimumDistance))
             with st.spinner('Wait for it...'):
                 st.session_state['state'], st.session_state['AEP'] = positionMultiRotor(boundaries, minimumDistance, st.session_state['n_mrs'], st.session_state['f'], st.session_state['A'], st.session_state['k'], st.session_state['wd'], ti, st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'], st.session_state['columns'], st.session_state['rows'])
@@ -209,7 +209,7 @@ def main():
             st.write('The capasity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
 
         if st.button("Optimize Wind Farm"):
-            minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'])
+            minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'], st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'])
             st.write("The minimum distance between multi rotors should be: ", str(minimumDistance))
             with st.spinner('Wait for it...'):
                 st.session_state['state'], st.session_state['AEP'] = positionMultiRotor(boundaries, minimumDistance, st.session_state['n_mrs'], st.session_state['f'], st.session_state['A'], st.session_state['k'], st.session_state['wd'], ti, st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'], st.session_state['columns'], st.session_state['rows'])
