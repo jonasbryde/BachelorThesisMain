@@ -2,7 +2,7 @@ from py_wake.site import XRSite
 import xarray as xr
 from py_wake.wind_turbines import WindTurbine
 from py_wake.wind_turbines.power_ct_functions import PowerCtTabular
-from GenerateMultiRotorCoordinates import generateMultiRotorCoordinates
+from generateMultiRotorCoordinates import generateMultiRotorCoordinates
 from py_wake import NOJ
 import numpy as np
 
