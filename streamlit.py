@@ -92,7 +92,7 @@ def main():
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
         n_wt = 100
-        st.write('The capasity at',option,'is',str(n_wt),'turbines')
+        st.write('The capacity at',option,'is',str(n_wt),'turbines')
 
         if st.button("Optimize Wind Farm"):
             with st.spinner('Wait for it...'):
@@ -138,7 +138,7 @@ def main():
         max_capasity = 1500
         if st.session_state['rows'] != None and st.session_state['columns'] != None:
             st.session_state['n_mrs'] = max_capasity // (st.session_state['rows'] * st.session_state['columns'])
-            st.write('The capasity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
+            st.write('The capacity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
 
         if st.button("Optimize Wind Farm"):
             minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'], st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'])
@@ -162,7 +162,7 @@ def main():
         st.session_state['f'], st.session_state['A'], st.session_state['k'] = perform_wind_analysis(option, latitude, longitude, start_date_formatted, end_date_formatted)
 
         n_wt = 33
-        st.write('The capasity at',option,'is',str(n_wt),'turbines')
+        st.write('The capacity at',option,'is',str(n_wt),'turbines')
 
         if st.button("Optimize Wind Farm"):
             with st.spinner('Wait for it...'):
@@ -206,7 +206,7 @@ def main():
         max_capasity = 500
         if st.session_state['rows'] != None and st.session_state['columns'] != None:
             st.session_state['n_mrs'] = max_capasity // (st.session_state['rows'] * st.session_state['columns'])
-            st.write('The capasity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
+            st.write('The capacity at',option,'with',str(st.session_state['rows']),'amount of rows, and',str(st.session_state['columns']),'amount of columns, is ',str(st.session_state['n_mrs']),'Multi Rotor Systems')
 
         if st.button("Optimize Wind Farm"):
             minimumDistance = MinimumDistanceMultiRotor(st.session_state['f'],st.session_state['A'],st.session_state['k'], st.session_state['wd'], st.session_state['rows'], st.session_state['columns'], st.session_state['turbineDiameter'], st.session_state['turbineTipClearence'])
