@@ -11,6 +11,7 @@ def sectorAEP(f, A, k, wd, ti, centers, my_wt, turbineDiameter, turbineTipCleare
 
     # Loop through each position of A and k
     for i in range(len(A)):
+        print('Currently computing results for sector',str(i),'of',str(len(A)))
         # Create new lists with zeros
         new_f = [0] * len(f)
 
