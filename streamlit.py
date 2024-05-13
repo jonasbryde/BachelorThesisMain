@@ -1,29 +1,11 @@
 import streamlit as st
-from streamlit_folium import folium_static
-import folium
-import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from windrose import WindroseAxes
-from scipy.stats import weibull_min
-from initializeTurbines import initializeTurbines
 from topfarm.constraint_components.boundary import XYBoundaryConstraint
-from py_wake import NOJ
-from py_wake.site import XRSite
-import xarray as xr
-from py_wake.wind_turbines import WindTurbine
-from py_wake.wind_turbines.power_ct_functions import PowerCtTabular
-from topfarm.cost_models.py_wake_wrapper import PyWakeAEPCostModelComponent
-from topfarm import TopFarmProblem
-from topfarm.easy_drivers import EasyScipyOptimizeDriver
-from topfarm.plotting import NoPlot, XYPlotComp
 from minimumDistance import MinimumDistanceMultiRotor
 from optimizeSingleTurbines import optimizeSingleTurbines
 from positionMultiRotor import positionMultiRotor
 from PerformWindAnalysis import perform_wind_analysis
-from pyproj import Proj, transform
-import ast
-import time
 from plotAEP import plotAEP
 from plotMAP import plotMAP
 
@@ -71,17 +53,6 @@ def main():
         ("Single Rotor", "Multi Rotor"), index=None, placeholder="Select turbine type..."
     )
     st.write('You selected:', rotorType)
-
-    
-
-
-
-
-
-
-
-
-
 
 
 
