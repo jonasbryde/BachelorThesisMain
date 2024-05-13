@@ -1,25 +1,16 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from py_wake.deficit_models.gaussian import IEA37SimpleBastankhahGaussian     #wake model
-from py_wake.examples.data.iea37 import IEA37_WindTurbines, IEA37Site         #wind turbines and site used
-from topfarm.cost_models.py_wake_wrapper import PyWakeAEPCostModelComponent   #cost model
-import streamlit as st
-
+from topfarm.cost_models.py_wake_wrapper import PyWakeAEPCostModelComponent   
 from topfarm import TopFarmProblem
 from topfarm.easy_drivers import EasyScipyOptimizeDriver
-from topfarm.examples.iea37 import get_iea37_initial, get_iea37_constraints, get_iea37_cost
 from topfarm.plotting import NoPlot, XYPlotComp
 from py_wake import NOJ
 from py_wake.site import XRSite
 import xarray as xr
-
 from py_wake.wind_turbines import WindTurbine
 from py_wake.wind_turbines.power_ct_functions import PowerCtTabular
 import numpy as np
 from topfarm.constraint_components.boundary import XYBoundaryConstraint
 from topfarm.constraint_components.spacing import SpacingConstraint
-import random
-import matplotlib.pyplot as plt
 from initializeTurbines import initializeTurbines
 
 
@@ -51,7 +42,7 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
                         hub_height=150,
                         powerCtFunction=PowerCtTabular(u,power,'kW',ct))
 
-    wfmodel = NOJ(site, wind_turbines)   #PyWake's wind farm model
+    wfmodel = NOJ(site, wind_turbines)   
 
     cost_comp = PyWakeAEPCostModelComponent(wfmodel, n_wt, wd=wd)
 
@@ -70,11 +61,6 @@ def optimizeSingleTurbines(boundaries, n_wt, min_initial_distance, f, A, k):
     
     aep_values.append(recorder['AEP'])
 
-    #sorted_aep_values = [(value, index + 1) for index, value in enumerate(aep_values)]
-
-    #print("AEP values:", aep_values)
-
-    
 
 
     return design_vars, state, aep_values
